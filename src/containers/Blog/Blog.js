@@ -1,62 +1,13 @@
 import React, { Component } from "react";
-import axios from "../../axios";
-
-import Post from "../../components/Post/Post";
-import FullPost from "../../components/FullPost/FullPost";
-import NewPost from "../../components/NewPost/NewPost";
+import Posts from "../Posts/Posts";
 import "./Blog.css";
+import {Route} from 'react-router-dom'
 
 class Blog extends Component {
-  state = {
-    post: [],
-    selectedPostId: null,
-    error: false
-  };
-
-  componentWillMount() {
-    axios
-      .get("posts")
-      .then(response => {
-        const posts = response.data.slice(0, 4);
-        const updatedPosts = posts.map(post => {
-          return {
-            ...post,
-            author: "Farid Ansari"
-          };
-        });
-        this.setState({ post: updatedPosts });
-        //console.log(response);
-      })
-      .catch(error => {
-        this.setState({ error: true });
-        //console.log(error);
-      });
-  }
-
-  selectPostHandler(id) {
-    this.setState({ selectedPostId: id });
-  }
   render() {
-    let posts = (
-      <p style={{ textAlign: "center", color: "red" }}>
-        Something went wrong!!
-      </p>
-    );
-    if (!this.state.error) {
-      posts = this.state.post.map(post => {
-        return (
-          <Post
-            key={post.id}
-            title={post.title}
-            author={post.author}
-            clicked={() => this.selectPostHandler(post.id)}
-          />
-        );
-      });
-    }
     return (
       <div className="Blogs">
-        <header >
+        <header>
           <nav>
             <ul>
               <li>
@@ -68,13 +19,10 @@ class Blog extends Component {
             </ul>
           </nav>
         </header>
-        <section className="Posts">{posts}</section>
-        <section>
-          <FullPost id={this.state.selectedPostId} />
-        </section>
-        <section>
-          <NewPost />
-        </section>
+
+     {/* <Route path="/" exact render={()=> <h1>Home</h1>} />
+     <Route path="/" render={()=> <h1>Homey</h1>} /> */}
+     <Route path= "/" exact component={Posts}/>
       </div>
     );
   }
