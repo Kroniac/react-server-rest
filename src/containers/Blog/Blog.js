@@ -41,10 +41,10 @@ class Blog extends Component {
 
         {/* <Route path="/" exact render={()=> <h1>Home</h1>} />
      <Route path="/" render={()=> <h1>Homey</h1>} /> */}
-
+        <Redirect from="/" to="/posts" />
         <Switch>
           <Route path="/posts" exact component={Posts} />
-          <Redirect from="/" to="/posts" />
+
           <Route path="/new-post" exact component={NewPost} />
           <Route path="/:id" exact component={FullPost} />
         </Switch>
