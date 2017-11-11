@@ -51,7 +51,7 @@ class Blog extends Component {
           <Route path="/posts" exact component={Posts} />
 
           <Route path="/new-post" exact component={AsyncNewPost} />
-          {/* <Route path="/:id" exact component={FullPost} /> */}
+           <Route path="/:id" exact component={FullPost} />
           <Route render={()=> <h1> Page Not Found </h1>}/>
         </Switch>
       </div>

@@ -35,6 +35,7 @@ class Posts extends Component {
 
   selectPostHandler(id) {
     this.props.history.push({pathname : "/" + id});
+    <Route component={FullPost}/>
    
     
    

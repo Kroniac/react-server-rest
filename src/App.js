@@ -5,6 +5,7 @@ import Blog from './containers/Blog/Blog';
 class App extends Component {
   render() {
     return (
+      //<BrowserRouter basename="/farid"> for setting base or root route
       <BrowserRouter>
       <div className="App">
         <Blog />
