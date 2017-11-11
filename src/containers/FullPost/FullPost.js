@@ -7,27 +7,37 @@ class FullPost extends Component {
     loadedPost: null
   };
   componentDidMount() {
-    console.log(this.props.match.params)
+    console.log(this.props.match.params);
     if (this.props.match.params.id) {
       if (
         !this.state.loadedPost ||
-        (this.state.loadedPost && this.state.loadedPost.match.params.id !== this.props.match.params.id)
+        (this.state.loadedPost &&
+          this.state.loadedPost.id != this.props.match.params.id)
       ) {
-        axios
-          .get("posts/" + this.props.match.params.id)
-          .then(response => {
-            this.setState({ loadedPost: response.data });
-          });
+        axios.get("posts/" + this.props.match.params.id).then(response => {
+          this.setState({ loadedPost: response.data });
+        });
+      }
+    }
+  }
+  componentDidUpdate() {
+    if (this.props.match.params.id) {
+      if (
+        !this.state.loadedPost ||
+        (this.state.loadedPost &&
+          this.state.loadedPost.id !== +this.props.match.params.id)
+      ) {
+        axios.get("posts/" + this.props.match.params.id).then(response => {
+          this.setState({ loadedPost: response.data });
+        });
       }
     }
   }
 
   deletePostHander = () => {
-    axios
-      .delete("posts/" + this.props.match.params.id)
-      .then(response => {
-        console.log(response);
-      });
+    axios.delete("posts/" + this.props.match.params.id).then(response => {
+      console.log(response);
+    });
   };
   render() {
     let post = <p style={{ textAlign: "center" }}>Loading...</p>;
@@ -37,7 +47,9 @@ class FullPost extends Component {
           <h1>{this.state.loadedPost.title}</h1>
           <p>{this.state.loadedPost.body}</p>
           <div className="Edit">
-            <button onClick={this.deletePostHander} className="Delete">Delete</button>
+            <button onClick={this.deletePostHander} className="Delete">
+              Delete
+            </button>
           </div>
         </div>
       );

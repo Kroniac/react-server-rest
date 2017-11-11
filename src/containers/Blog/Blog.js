@@ -19,7 +19,7 @@ class Blog extends Component {
             <ul>
               <li>
                 <NavLink
-                  to={"/posts"}
+                  to={"/posts/"}
                   exact
                   activeClassName="active"
                   activeStyle={{
@@ -48,10 +48,10 @@ class Blog extends Component {
      <Route path="/" render={()=> <h1>Homey</h1>} /> */}
         
         <Switch>
-          <Route path="/posts" exact component={Posts} />
+          <Route path="/new-post"  component={AsyncNewPost} />
+          <Route path="/posts/" component={Posts} />
 
-          <Route path="/new-post" exact component={AsyncNewPost} />
-           <Route path="/:id" exact component={FullPost} />
+           
           <Route render={()=> <h1> Page Not Found </h1>}/>
         </Switch>
       </div>

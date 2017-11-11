@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import axios from "../../axios";
 import Post from "../../components/Post/Post";
 import "./Posts.css";
-import {Route} from 'react-router-dom'
-import FullPost from "../FullPost/FullPost"
+import { Route } from "react-router-dom";
+import FullPost from "../FullPost/FullPost";
 
 class Posts extends Component {
   state = {
@@ -34,14 +34,11 @@ class Posts extends Component {
   }
 
   selectPostHandler(id) {
-    this.props.history.push({pathname : "/" + id});
-    <Route component={FullPost}/>
-   
-    
-   
+    this.props.history.push({ pathname: "/posts/" + id });
   }
-
+ 
   render() {
+    
     let posts = (
       <p style={{ textAlign: "center", color: "red" }}>
         Something went wrong!!
@@ -51,7 +48,7 @@ class Posts extends Component {
       posts = this.state.post.map(post => {
         return (
           <Post
-          key={post.id}
+            key={post.id}
             title={post.title}
             author={post.author}
             clicked={() => this.selectPostHandler(post.id)}
@@ -60,7 +57,13 @@ class Posts extends Component {
       });
     }
 
-    return <section className="Posts">{posts}</section>;
+    return (
+      <div>
+        <section className="Posts">{posts}</section>
+        
+        <Route path={this.props.match.url +"/:id"}  component={FullPost} />
+      </div>
+    );
   }
 }
 
